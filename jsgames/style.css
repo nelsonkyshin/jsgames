@@ -1,0 +1,16 @@
+.scoreArea{
+	padding: 10px;
+}
+.gameButton {
+	border-style: solid;
+	border-color: blue;
+	height: 100px;
+}
+
+.gameButton.white {
+	background: white;
+}
+
+.gameButton.black {
+	background: black;
+}
