@@ -23,10 +23,10 @@ function drawNewGrid() {
 	gameArea.html('');
 	
 	for(var y=0; y<rows; y++) {
-		gameArea.append('<div class="container">');
+		gameArea.append('<div class="row">');
 		for (var x=0; x<cols; x++) {
 			var col = grid[y][x] ? 'black': 'white'; 
-			gameArea.append('<button class="gameButton btn col-sm-2 ' + col + '" id="gameButton'+x+'-'+y+'" onclick="buttonClick(' + x + ',' + y +')"></button>');
+			gameArea.append('<div class="col-md-2"><button class="gameButton btn ' + col + '" id="gameButton'+x+'-'+y+'" onclick="buttonClick(' + x + ',' + y +')"></button></div>');
 		}
 		gameArea.append('</div>');
 	}
