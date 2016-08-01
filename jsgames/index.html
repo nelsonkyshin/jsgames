@@ -12,16 +12,41 @@
 <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
+<div class="container">
+<div class="jumbotron">
+			<h1>Tile Switch Game - Basic JavaScript</h1>
+			<p>This is a small example of a game using JavaScript and basic event features of HTML. Style uses Twitter Bootstrap to manage columns and forms.</p>
+			<p>This small example lacks a structured model, as state and events are encoded into the elements IDs themselves. A better version would use an MV* framework such as Backbone with auto-updating views connected to the DOM object event handlers. A project for next time...!</p>
+		</div>
+		</div>
 	<div class="container">
-		<h1>This is Nelson KYShin's Website</h1>
-		<p>
-			Here is some <strong>web content</strong>.
-		</p>
-		<div class="scoreArea container"></div>
-		<div class="gameArea container"></div>
+		
+		<div class="newGameArea row">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="nrows" class="col-xs-2 control-label">Rows to Generate</label>
+					<div class="col-xs-4">
+					<select id="nrows" class="form-control">
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+						<option>6</option>
+						<option>7</option>
+					</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-offset-2 col-xs-2"><button type="button" class="btn btn-primary" onclick="clickedNewGame()">New Game</button></div>
+					<div class="col-xs-2"><button type="button" class="btn btn-default" onclick="resetGame()" id="resetButton">Reset Current Game</button></div>
+				</div>
+			</form>
+		</div>
+		
+		<div class="row text-center text-success"><h1 id="scoreArea"></h1></div>
+		<div class="gameArea row"></div>
 		<footer>
 			<hr>
-			&copy; Nelson Kyshin 2016
+			&copy; Nelson KSY 2016
 		</footer>
 	</div>
 </body>

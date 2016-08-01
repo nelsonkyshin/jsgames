@@ -1,24 +1,46 @@
 $(function() {
-	newGame();
+	clickedNewGame();
 });
 
 var grid = [ [false, false, true, true, true, true], [false, true, true, true, true, true], [true, true, true, true, true, true] ];
 var rows = grid.length;
-var cols = grid[0].length;
+var cols = grid[0].length; // set to 6
 var score = 0;
 
-function newGame() {
-	score = -1;
+function clickedNewGame() {
+	rows = Math.max(3, $('#nrows').val());
+	randomizeGrid();
+	resetGame();
+}
+
+function randomizeGrid() {
+	// assume ncols is set to 6
+	grid = new Array();
+ 	console.log(cols + " "+rows); 
+	for (var i = 0; i < rows; i++) {
+		grid[i] = new Array();
+		for (var j = 0 ; j < cols; j++) {
+				grid[i][j] = (Math.random() > 0.5) ? true : false;
+		}
+	}
+}
+
+function resetGame() {
+	score = 0;
 	updateScore();
-	drawNewGrid();
+	renderGrid();
+	disableResetButton();
+}
+
+function disableResetButton() {
+	$('#resetButton').prop('disabled', true);
 }
 
 function updateScore() {
-	score++;
-	$('.scoreArea').html('Score: ' + score);
+	$('#scoreArea').html('Score: ' + score);
 }
 
-function drawNewGrid() {
+function renderGrid() {
 	var gameArea = $('.gameArea');
 	gameArea.html('');
 	
@@ -26,17 +48,22 @@ function drawNewGrid() {
 		gameArea.append('<div class="row">');
 		for (var x=0; x<cols; x++) {
 			var col = grid[y][x] ? 'black': 'white'; 
-			gameArea.append('<div class="col-md-2"><button class="gameButton btn ' + col + '" id="gameButton'+x+'-'+y+'" onclick="buttonClick(' + x + ',' + y +')"></button></div>');
+			gameArea.append('<div class="col-xs-2 gameButtonArea"><button class="btn gameButton ' + col + '" id="gameButton'+x+'-'+y+'" onclick="buttonClick(' + x + ',' + y +')"></button></div>');
 		}
 		gameArea.append('</div>');
 	}
 }
 
 function buttonClick(x, y) {
+	enableResetButton();
 	updateScore();
 	affectButtons(x, y);
 	if (checkWinCondition())
 		endGame();
+}
+
+function enableResetButton() {
+	$('#resetButton').prop('disabled', false);
 }
 
 function affectButtons(x, y) {
@@ -60,8 +87,7 @@ function checkWinCondition() {
 }
 
 function endGame() {
-	$('.scoreArea').html('Finished game! Final Score = '+score);
-	$('.scoreArea').append(' <button class="btn btn-success" onclick="newGame()">New Game</button>');
+	$('#scoreArea').html('Congratulations! You won with a winning score of '+score+'.');
 	$('.gameButton').prop('disabled', 'true');
 	
 }
