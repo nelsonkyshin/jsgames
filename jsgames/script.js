@@ -56,6 +56,7 @@ function renderGrid() {
 
 function buttonClick(x, y) {
 	enableResetButton();
+	score++;
 	updateScore();
 	affectButtons(x, y);
 	if (checkWinCondition())
